@@ -282,15 +282,15 @@ aiBoxes.forEach(aiBox => {
 
   let cw = 0;
   let ch = 0;
-  function getBaseSize() {
-  if (window.innerWidth < 480) {
-    return random(12, 16); // mobile
+ function getBaseSize() {
+    if (window.innerWidth < 480) {
+      return random(25, 40); // mobile
+    }
+    if (window.innerWidth < 768) {
+      return random(20, 30); // tablet
+    }
+    return random(22, 40); // desktop
   }
-  if (window.innerWidth < 768) {
-    return random(20, 30); // tablet
-  }
-  return random(22, 40); // desktop
-}
 
 
   /* 🔹 Resize canvas */
@@ -354,7 +354,7 @@ aiBoxes.forEach(aiBox => {
         y: random(0, ch),
         baseSize: getBaseSize(),
         speedX: random(-0.3, 0.3),
-        speedY: random(-2.5, -0.6) / item.scale,
+        speedY: random(-1.4, -0.6),
         img: item.img,
         scale: item.scale
       });
