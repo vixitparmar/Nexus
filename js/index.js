@@ -253,28 +253,28 @@ document.addEventListener("DOMContentLoaded", () => {
   // Select all elements with .visual-card or .ai-image
   const aiBoxes = document.querySelectorAll('.visual-card, .ai-image');
 
-aiBoxes.forEach(aiBox => {
-  const video = aiBox.querySelector('video');
+  aiBoxes.forEach(aiBox => {
+    const video = aiBox.querySelector('video');
 
-  if (!video) return; // skip if no video inside
+    if (!video) return; // skip if no video inside
 
-  // Make sure the video is paused and reset when the page loads
-  video.pause();
-  video.currentTime = 0;
+    // Make sure the video is paused and reset when the page loads
+    video.pause();
+    video.currentTime = 0;
 
-  aiBox.addEventListener('mouseenter', () => {
-    setTimeout(() => {
-      video.play(); // play after 0.5 seconds when mouse enters
-    }, 500); // 500ms delay before playing the video
+    aiBox.addEventListener('mouseenter', () => {
+      setTimeout(() => {
+        video.play(); // play after 0.5 seconds when mouse enters
+      }, 500); // 500ms delay before playing the video
+    });
+
+    aiBox.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        video.pause();
+        video.currentTime = 0; // reset video after 0.5 seconds when mouse leaves
+      }, 500); // 500ms delay before pausing and resetting the video
+    });
   });
-
-  aiBox.addEventListener('mouseleave', () => {
-    setTimeout(() => {
-      video.pause();
-      video.currentTime = 0; // reset video after 0.5 seconds when mouse leaves
-    }, 500); // 500ms delay before pausing and resetting the video
-  });
-});
 
 
   const canva = document.getElementById("background-canvas");
@@ -282,7 +282,7 @@ aiBoxes.forEach(aiBox => {
 
   let cw = 0;
   let ch = 0;
- function getBaseSize() {
+  function getBaseSize() {
     if (window.innerWidth < 480) {
       return random(25, 40); // mobile
     }
@@ -342,26 +342,32 @@ aiBoxes.forEach(aiBox => {
   /* 🔹 Particles */
   const particles = [];
   const COUNT = 150;
-function speedDivider() {
-  return screenW < 480 ? 2.2 : screenW < 768 ? 1.6 : 1;
-}
+
+  function getSpeedMultiplier() {
+    if (window.innerWidth < 480) return 4;   // mobile → faster
+    if (window.innerWidth < 768) return 1.6;   // tablet
+    return 1;                                  // desktop
+  }
+
+
   function initParticles() {
     particles.length = 0;
 
     for (let i = 0; i < COUNT; i++) {
       const item = images[Math.floor(Math.random() * images.length)];
-
+      const speedBoost = getSpeedMultiplier();
       particles.push({
         x: random(0, cw),
         y: random(0, ch),
         baseSize: getBaseSize(),
-        speedX: random(-0.3, 0.3),
-        speedY: random(-2.5, -0.6) / item.scale / speedDivider(),
+        speedX: random(-0.3, 0.3) * speedBoost,
+        speedY: random(-1.4, -0.6) / item.scale * speedBoost,
         img: item.img,
         scale: item.scale
       });
     }
   }
+
 
   /* 🔹 Animate */
   function animate() {
@@ -396,12 +402,12 @@ function speedDivider() {
     requestAnimationFrame(animate);
   }
 
-  // Update canvas size on resize
- window.addEventListener("resize", () => {
-  screenW = window.innerWidth;
-  resizeCanva();
-  initParticles(); // recreate icons with correct size
-});
+  window.addEventListener("resize", () => {
+    screenW = window.innerWidth;
+    resizeCanva();
+    initParticles(); // recreate icons with correct size
+  });
+
 
 
 });
