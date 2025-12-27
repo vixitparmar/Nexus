@@ -343,31 +343,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const particles = [];
   const COUNT = 150;
 
-  function getSpeedMultiplier() {
-    if (window.innerWidth < 480) return 4;   // mobile → faster
-    if (window.innerWidth < 768) return 1.6;   // tablet
-    return 1;                                  // desktop
-  }
-
-
   function initParticles() {
     particles.length = 0;
 
     for (let i = 0; i < COUNT; i++) {
       const item = images[Math.floor(Math.random() * images.length)];
-      const speedBoost = getSpeedMultiplier();
+
       particles.push({
         x: random(0, cw),
         y: random(0, ch),
         baseSize: getBaseSize(),
-        speedX: random(-0.3, 0.3) * speedBoost,
-        speedY: random(-1.4, -0.6) / item.scale * speedBoost,
+        speedX: random(-0.3, 0.3),
+        speedY: random(-2.5, -0.6) / item.scale,
         img: item.img,
         scale: item.scale
       });
     }
   }
-
 
   /* 🔹 Animate */
   function animate() {
@@ -402,11 +394,11 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
 
-  window.addEventListener("resize", () => {
-    screenW = window.innerWidth;
-    resizeCanva();
-    initParticles(); // recreate icons with correct size
-  });
+ window.addEventListener("resize", () => {
+  screenW = window.innerWidth;
+  resizeCanva();
+  initParticles(); // recreate icons with correct size
+});
 
 
 
