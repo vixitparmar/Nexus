@@ -395,10 +395,11 @@ aiBoxes.forEach(aiBox => {
   }
 
   // Update canvas size on resize
-  window.addEventListener("resize", () => {
-    canva.width = window.innerWidth;
-    canva.height = window.innerHeight;
-  });
+ window.addEventListener("resize", () => {
+  screenW = window.innerWidth;
+  resizeCanva();
+  initParticles(); // recreate icons with correct size
+});
 
 
 });
