@@ -342,7 +342,9 @@ aiBoxes.forEach(aiBox => {
   /* 🔹 Particles */
   const particles = [];
   const COUNT = 150;
-
+function speedDivider() {
+  return screenW < 480 ? 2.2 : screenW < 768 ? 1.6 : 1;
+}
   function initParticles() {
     particles.length = 0;
 
@@ -354,7 +356,7 @@ aiBoxes.forEach(aiBox => {
         y: random(0, ch),
         baseSize: getBaseSize(),
         speedX: random(-0.3, 0.3),
-        speedY: random(-1.4, -0.6),
+        speedY: random(-2.5, -0.6) / item.scale / speedDivider(),
         img: item.img,
         scale: item.scale
       });
