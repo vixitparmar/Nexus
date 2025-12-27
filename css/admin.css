@@ -1,0 +1,848 @@
+/* =========================
+   RESET & BASE
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at top, #020617, #000);
+  color: #e5e7eb;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  width: 230px;
+  background: linear-gradient(180deg, #020617, #01030f);
+  padding: 22px;
+  border-right: 1px solid #1e293b;
+}
+
+.logo {
+  color: #22d3ee;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  transition: all 0.25s ease;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(34,211,238,0.15),
+    rgba(168,85,247,0.05)
+  );
+  color: #22d3ee;
+}
+
+/* =========================
+   MAIN AREA
+========================= */
+.main {
+  flex: 1;
+  padding: 26px;
+  overflow-y: auto;
+  animation: fadeSlideUp 0.6s ease;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.header p {
+  margin: 4px 0 0;
+  color: #94a3b8;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile span {
+  background: #020617;
+  border: 1px solid #1e293b;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.profile button {
+  background: #020617;
+  border: 1px solid #334155;
+  color: white;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile button:hover {
+  background: #0f172a;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(2,6,23,0.95),
+    rgba(2,6,23,0.75)
+  );
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  margin-top: 28px;
+  padding: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+.actions button {
+  background: #020617;
+  border: 1px solid #1e293b;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: all 0.2s ease;
+}
+
+.actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+button:active {
+  transform: scale(0.96);
+}
+
+.actions .export {
+  background: linear-gradient(135deg, #22d3ee, #a855f7);
+  border: none;
+}
+
+
+.actions .export {
+  position: relative;
+}
+
+.actions .export::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #22d3ee, #a855f7);
+  filter: blur(12px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.actions .export:hover::after {
+  opacity: 0.6;
+}
+
+/* =========================
+   FILTERS
+========================= */
+.filters {
+  display: flex;
+  gap: 14px;
+  margin: 18px 0 22px;
+}
+
+.filters input,
+.filters select {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background: rgba(2,6,23,0.9);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 2px rgba(34,211,238,0.25);
+}
+
+/* =========================
+   TABLE
+========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  font-size: 13px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+th, td {
+  padding: 14px;
+  border-bottom: 1px solid #1e293b;
+}
+
+tbody tr {
+  position: relative;
+}
+
+tbody tr::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(34,211,238,0.08),
+    transparent
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+tbody tr:hover::after {
+  opacity: 1;
+}
+
+tbody tr:hover {
+  transform: translateY(-2px) scale(1.002);
+}
+
+
+/* =========================
+   STATUS BADGES
+========================= */
+.status {
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pending {
+  background: #422006;
+  color: #facc15;
+}
+
+.approved {
+  background: #052e16;
+  color: #4ade80;
+  animation: pulse 2s infinite;
+}
+
+.rejected {
+  background: #450a0a;
+  color: #f87171;
+}
+
+/* =========================
+   ACTION DROPDOWN
+========================= */
+select.action {
+  background: #020617;
+  border: 1px solid #1e293b;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+select.action:hover {
+  border-color: #22d3ee;
+}
+
+select.action:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(34,211,238,0.3);
+}
+
+/* =========================
+   GLOBAL ANIMATIONS
+========================= */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 rgba(34,211,238,0.4); }
+  50% { box-shadow: 0 0 14px rgba(34,211,238,0.6); }
+  100% { box-shadow: 0 0 0 rgba(34,211,238,0.4); }
+}
+
+
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* APP LAYOUT */
+  .app {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* SIDEBAR → TOP BAR */
+  .sidebar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-right: none;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  .sidebar nav a {
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* MAIN */
+  .main {
+    padding: 18px;
+  }
+
+  /* HEADER */
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .profile {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* CARD */
+  .card {
+    padding: 18px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+
+  /* FILTERS */
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* TABLE */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  thead {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+
+  /* STATUS */
+  .status {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  /* ACTION DROPDOWN */
+  select.action {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .profile span {
+    font-size: 12px;
+  }
+
+  .actions button {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+
+
+/* ================= ROOT ================= */
+:root {
+  --primary: #00d4ff;
+  --secondary: #0ea5e9;
+  --dark: #020617;
+  --panel: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+}
+
+/* ================= LAYOUT ================= */
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: var(--text);
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  width: 240px;
+  padding: 30px 20px;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(14px);
+  border-right: 1px solid var(--border);
+}
+
+.sidebar .logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, var(--primary), #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  background: rgba(0, 212, 255, 0.1);
+  color: #ffffff;
+}
+
+.sidebar nav a.active {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.25),
+    rgba(14, 165, 233, 0.15)
+  );
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+}
+
+/* ================= MAIN ================= */
+.main {
+  flex: 1;
+  padding: 35px 40px;
+}
+
+/* ================= HEADER ================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* PROFILE */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--panel);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.profile span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.profile button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* ================= CARD ================= */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* CARD HEADER */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  font-size: 1.3rem;
+}
+
+/* ACTION BUTTONS */
+.actions button {
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.actions button:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.4);
+}
+
+.actions .export {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #000;
+  border: none;
+}
+
+.actions .export:hover {
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.35);
+}
+
+/* ================= FILTERS ================= */
+.filters {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.filters input,
+.filters select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+  outline: none;
+}
+
+.filters input::placeholder {
+  color: var(--muted);
+}
+
+/* ================= TABLE ================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+th,
+td {
+  padding: 14px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+th {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s ease;
+}
+
+tbody tr:hover {
+  background: rgba(0, 212, 255, 0.08);
+}
+
+/* ================= STATUS CHIPS ================= */
+td:nth-child(5) {
+  font-weight: 600;
+}
+
+td:nth-child(5):contains("pending") {
+  color: #facc15;
+}
+td:nth-child(5):contains("approved") {
+  color: #4ade80;
+}
+td:nth-child(5):contains("rejected") {
+  color: #f87171;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  .main {
+    padding: 25px 20px;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+}
+/* ================= STATUS PILLS ================= */
+td:nth-child(5) {
+  text-transform: capitalize;
+}
+
+td:nth-child(5) span,
+td:nth-child(5) {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  min-width: 90px;
+}
+
+/* Pending */
+.status-pending {
+  background: rgba(250, 204, 21, 0.15);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.35);
+}
+
+/* Approved */
+.status-approved {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+}
+
+/* Rejected */
+.status-rejected {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+/* ================= ACTION COLUMN ================= */
+td:last-child button,
+td:last-child a {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+td:last-child button:hover,
+td:last-child a:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Row focus effect */
+tbody tr:hover td:last-child {
+  opacity: 1;
+}
+/* ================= DARKER MODE ================= */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: radial-gradient(circle at top, #020617, #000000);
+  }
+
+  .sidebar {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  table thead {
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+/* ================= SHIMMER LOADER ================= */
+table.loading tbody tr {
+  position: relative;
+  height: 52px;
+  overflow: hidden;
+}
+
+table.loading tbody tr td {
+  color: transparent;
+}
+
+table.loading tbody tr::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.12) 37%,
+    rgba(255, 255, 255, 0.06) 63%
+  );
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

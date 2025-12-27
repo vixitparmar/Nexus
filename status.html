@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Booking Status | CryptoSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/status.css" />
+  <link rel="stylesheet" href="css/chatbot.css">
+</head>
+<body>
+
+
+
+
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="logo-area">
+    <span class="logo-glow"></span>
+    <img src="assets/logo2metaa.jpg" alt="CryptoSA Logo" class="logo-img">
+    <span class="logo-text">MetaLife <b>AI</b></span>
+  </div>
+
+
+
+  <!-- Mobile toggle -->
+  <input type="checkbox" id="nav-toggle">
+
+  <label for="nav-toggle" class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="book.html">Book Now</a>
+    <a class="active">Check Status</a>
+  </nav>
+
+</header>
+
+
+
+
+<!-- ================= STATUS SECTION ================= -->
+<section class="status-hero">
+  <!-- AI + Crypto Background -->
+  <div class="ai-bg"></div>
+  <div class="crypto-particles">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <h1>
+    Check <span>Booking Status</span>
+  </h1>
+  <p>Enter your booking ID to view your current status</p>
+
+  <div class="status-box">
+    <input
+      type="text"
+      id="bookingId"
+      placeholder="e.g., CRYPTO-XXXXXX"
+    />
+    <button id="checkStatusBtn">
+      <span class="emoji"><i class="fas fa-search"></i></span>
+      <span class="text">Check</span>
+    </button>
+  </div>
+
+  <div id="statusResult" class="status-result"></div>
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h3>MetaLife Ai</h3>
+      <p>
+        Your trusted partner for cryptocurrency services.
+      </p>
+      <span class="badge">MetaCoins Ai Regulatory Compliant</span>
+    </div>
+
+    <div>
+      <h4>Quick Links</h4>
+      <a>Book Now</a>
+      <a>Check Status</a>
+      <a>Admin Portal</a>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>support@cryptosa.sa</p>
+      <p>+966 XX XXX XXXX</p>
+      <p>Riyadh, Saudi Arabia</p>
+    </div>
+  </div>
+
+  <p class="copyright">
+    ©️ 2025 MetaLife AI. All rights reserved.
+  </p>
+</footer>
+
+<script src="js/status.js"></script>
+
+
+
+<!-- ===== CHATBOT START ===== -->
+<div id="chat-fab"><i class="fas fa-comments"></i></div>
+
+<div id="chat-panel">
+  <div class="chat-header">
+    <span>Live Support</span>
+    <span id="chat-close">✕</span>
+  </div>
+
+  <div id="chat-body"></div>
+
+  <div class="chat-input">
+    <input id="chat-input" type="text" placeholder="Type your message..." />
+    <button title="Send" id="chat-send"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="css/chatbot.css">
+<script src="js/chatbot.js"></script>
+<!-- ===== CHATBOT END ===== -->
+
+
+
+
+
+</body>
+</html>

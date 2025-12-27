@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CryptoSA | Book Early Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/book.css"/>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">MetaLife Ai</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a class="active">Book Now</a>
+    <a href="status.html">Check Status</a>
+  </nav>
+</header>
+
+<section class="booking">
+
+  <!-- TITLE -->
+  <h1>Purchase <span>MetaLife AI</span></h1>
+  <p class="subtitle">
+    Choose your participation amount and get early access to the MetaLife AI ecosystem.
+  </p>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step active">1</div>
+    <div class="line"></div>
+    <div class="step">2</div>
+    <div class="line"></div>
+    <div class="step">3</div>
+  </div>
+
+  <!-- ================= STEP 1 ================= -->
+  <div class="step-content active" id="step1">
+    <h2 class="amount-title">Select Purchase Amount</h2>
+    <p class="amount-sub">
+      Minimum purchase: <b>$200</b> | Maximum purchase: <b>$15,000</b>
+    </p>
+
+    <div class="amount-box">
+      <span>$</span>
+      <input
+        type="number"
+        id="purchaseAmount"
+        min="200"
+        max="15000"
+        placeholder="Enter amount"
+        required
+      >
+    </div>
+
+    <div class="amount-presets">
+      <button type="button" data-value="200">$200</button>
+      <button type="button" data-value="500">$500</button>
+      <button type="button" data-value="1000">$1,000</button>
+      <button type="button" data-value="5000">$5,000</button>
+      <button type="button" data-value="10000">$10,000</button>
+      <button type="button" data-value="15000">$15,000</button>
+    </div>
+
+    <button class="continue" id="toStep2">Continue →</button>
+  </div>
+
+  <!-- ================= STEP 2 ================= -->
+  <div class="step-content" id="step2">
+    <form id="bookingForm">
+
+      <input id="fullName" placeholder="Full Name" required>
+
+      <input id="email" type="email" placeholder="Email Address" required>
+
+      <input id="phone" placeholder="Phone Number" required>
+
+      <!-- ✅ TELEGRAM ID ADDED -->
+      <input
+        id="telegram"
+        placeholder="Telegram ID (e.g. @username)"
+        required
+      >
+
+      <button type="submit">Continue →</button>
+    </form>
+  </div>
+
+  <!-- ================= STEP 3 ================= -->
+  <div class="step-content" id="step3">
+
+    <h2>Confirm Your Details</h2>
+
+    <div class="confirm-box">
+      <p><strong>Amount:</strong> <span id="confirmPrice"></span></p>
+      <p><strong>Type:</strong> <span id="confirmPackage"></span></p>
+      <p><strong>Name:</strong> <span id="confirmName"></span></p>
+      <p><strong>Email:</strong> <span id="confirmEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="confirmPhone"></span></p>
+
+      <!-- ✅ TELEGRAM CONFIRM -->
+      <p><strong>Telegram:</strong> <span id="confirmTelegram"></span></p>
+    </div>
+
+    <div class="booking-id" style="display:none;">
+      <p>Your Booking ID:</p>
+      <strong id="confirmBookingId"></strong>
+    </div>
+
+    <div class="confirm-actions">
+      <button id="backToStep2" type="button">← Back</button>
+      <button id="finalConfirm" type="button">Confirm Booking ✓</button>
+    </div>
+
+  </div>
+
+</section>
+
+<script src="js/booking.js"></script>
+
+<!-- ===== CHATBOT ===== -->
+<div id="chat-fab"><i class="fas fa-comments"></i></div>
+
+<div id="chat-panel">
+  <div class="chat-header">
+    <span>Live Support</span>
+    <span id="chat-close">✕</span>
+  </div>
+
+  <div id="chat-body"></div>
+
+  <div class="chat-input">
+    <input id="chat-input" type="text" placeholder="Type your message..." />
+    <button id="chat-send">➤</button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="css/chatbot.css">
+<script src="js/chatbot.js"></script>
+<!-- ===== CHATBOT END ===== -->
+
+</body>
+</html>

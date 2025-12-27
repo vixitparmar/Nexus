@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- ✅ REQUIRED FOR MOBILE RESPONSIVENESS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Admin Login | Crypto</title>
+
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+
+  <!-- 🌌 BACKGROUND ANIMATION -->
+  <div class="bg-blobs">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- 🔐 LOGIN WRAPPER -->
+  <div class="login-wrapper">
+    <div class="login-card">
+
+      <h2>Admin Login</h2>
+      <p class="subtitle">Secure access to admin dashboard</p>
+
+      <div class="input-group">
+        <input type="email" id="email" required />
+        <label>Email Address</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="password" required />
+        <label>Password</label>
+      </div>
+
+      <button onclick="login()">Login</button>
+
+      <div id="error" class="error"></div>
+
+    </div>
+  </div>
+  <script src="js/adminAuth.js"></script>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

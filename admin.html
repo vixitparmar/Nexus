@@ -1,0 +1,117 @@
+<script>
+  const token = localStorage.getItem("adminToken");
+  if (!token) {
+    window.location.href = "/admin-login.html";
+  }
+  </script>
+  
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard | CryptoSA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <!-- STYLES -->
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+  
+  <div class="app">
+  
+    <!-- ======================
+         SIDEBAR
+    ======================= -->
+    <aside class="sidebar">
+      <h2 class="logo">Admin</h2>
+  
+      <nav>
+        <a class="active">Bookings</a>
+        <a href="support.html">Support</a>
+      </nav>
+    </aside>
+  
+    <!-- ======================
+         MAIN CONTENT
+    ======================= -->
+    <main class="main">
+  
+      <!-- HEADER -->
+      <header class="header">
+        <div>
+          <h1>Welcome back</h1>
+          <p>Manage your bookings and support</p>
+        </div>
+  
+        <div class="profile">
+          <span id="adminEmail">st716640326@gmail.com</span>
+          <button class="signout-btn" onclick="logout()">Sign Out</button>
+        </div>
+      </header>
+  
+      <!-- BOOKINGS CARD -->
+      <section class="card">
+  
+        <!-- CARD HEADER -->
+        <div class="card-header">
+          <h2>Bookings Management</h2>
+  
+          <div class="actions">
+            <button onclick="loadBookings()">Refresh</button>
+            <button class="export" onclick="exportCSV()">Export CSV</button>
+          </div>
+        </div>
+  
+        <!-- FILTERS -->
+        <div class="filters">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by ID, name, email or telegram"
+            oninput="applyFilters()"
+          />
+  
+          <select id="statusFilter" onchange="applyFilters()">
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+  
+        <!-- TABLE -->
+        <table>
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+  
+              <!-- ✅ TELEGRAM COLUMN -->
+              <th>Telegram</th>
+  
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+  
+          <tbody id="bookingTable">
+            <!-- injected dynamically -->
+          </tbody>
+        </table>
+  
+      </section>
+  
+    </main>
+  </div>
+  
+  <!-- ======================
+       SCRIPTS
+  ======================= -->
+  <script src="js/adminDashboard.js"></script>
+  
+  </body>
+  </html>
+  

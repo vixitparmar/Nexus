@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Support | Crypto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- MAIN ADMIN / SUPPORT STYLES -->
+  <link rel="stylesheet" href="css/support.css" />
+</head>
+<body>
+
+<!-- AUTH CHECK -->
+<script>
+  const token = localStorage.getItem("adminToken");
+  if (!token) {
+    window.location.href = "/admin-login.html";
+  }
+</script>
+
+<div class="support">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <h2 class="logo">Admin</h2>
+
+    <nav>
+      <a href="admin.html">Bookings</a>
+      <a class="active">Support</a>
+    </nav>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+
+    <!-- ================= HEADER ================= -->
+  <header class="admin-header">
+  <div class="header-left">
+    <h1>Welcome back</h1>
+    <p>Manage your bookings and support</p>
+  </div>
+
+  <div class="header-right">
+    <span class="admin-email">st716640326@gmail.com</span>
+    <button class="signout-btn" onclick="logout()">Sign Out</button>
+  </div>
+</header>
+
+
+    <!-- ================= SUPPORT AREA ================= -->
+    <section class="support">
+
+      <!-- CONVERSATIONS -->
+      <div class="card conversations">
+        <h3><i class="fas fa-comments"></i> Conversations</h3>
+        <div id="conversationList" class="conversation-list">
+          <div class="empty">Loading conversations...</div>
+        </div>
+      </div>
+
+      <!-- CHAT -->
+      <div class="card chat">
+        <h3>Select a conversation</h3>
+
+        <div class="chat-empty">
+          <i class="fas fa-comments"></i>
+          <p>Select a conversation to view messages</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script src="js/support.js"></script>
+
+<script>
+  function logout() {
+    localStorage.removeItem("adminToken");
+    window.location.href = "/admin-login.html";
+  }
+</script>
+
+</body>
+</html>
