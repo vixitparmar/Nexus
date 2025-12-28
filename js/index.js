@@ -276,128 +276,145 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+const canva = document.getElementById("background-canvas");
+const ctx2 = canva.getContext("2d");
 
-  const canva = document.getElementById("background-canvas");
-  const ctx2 = canva.getContext("2d");
+let cw = 0, ch = 0;
 
-  let cw = 0;
-  let ch = 0;
-  function getBaseSize() {
-    if (window.innerWidth < 480) {
-      return random(25, 40); // mobile
-    }
-    if (window.innerWidth < 768) {
-      return random(20, 30); // tablet
-    }
-    return random(22, 40); // desktop
-  }
+/* 🔹 Helpers */
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
+function getBaseSize() {
+  if (window.innerWidth < 480) return random(20, 28);
+  if (window.innerWidth < 768) return random(22, 34);
+  return random(24, 40);
+}
 
-  /* 🔹 Resize canvas */
-  function resizeCanva() {
-    const dpr = window.devicePixelRatio || 1;
-    cw = canva.clientWidth;
-    ch = canva.clientHeight;
+/* 🔹 Resize canvas (DPR LIMITED) */
+function resizeCanva() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  cw = canva.clientWidth;
+  ch = canva.clientHeight;
 
-    canva.width = cw * dpr;
-    canva.height = ch * dpr;
+  canva.width = cw * dpr;
+  canva.height = ch * dpr;
 
-    ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  resizeCanva();
-  window.addEventListener("resize", resizeCanva);
+  ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+resizeCanva();
+window.addEventListener("resize", resizeCanva);
 
-  const imageConfig = [
-    { src: "assets/Robot.png", scale: 1 }, // 👈 BIG IMAGE
-    { src: "assets/LockIcon.png", scale: 1.5 },
-    { src: "assets/FingerprintIcon.png", scale: 1.8 }
-  ];
+/* ==============================
+   IMAGE CONFIG
+============================== */
+const imageConfig = [
+  { src: "assets/Robot.png", scale: 1 },
+  { src: "assets/LockIcon.png", scale: 1.4 },
+  { src: "assets/FingerprintIcon.png", scale: 1.6 }
+];
 
-  /* 🔹 Load images */
-  const images = [];
-  let loaded = 0;
+const images = [];
+let loaded = 0;
 
-  imageConfig.forEach(item => {
-    const img = new Image();
-    img.src = item.src;
-    img.onload = () => {
-      loaded++;
-      if (loaded === imageConfig.length) {
-        initParticles();
-        animate();
-      }
-    };
-
+/* 🔹 Load images */
+imageConfig.forEach(item => {
+  const img = new Image();
+  img.src = item.src;
+  img.onload = () => {
     images.push({
       img,
-      scale: item.scale
+      scale: item.scale,
+      aspect: img.naturalWidth / img.naturalHeight
     });
-  });
-
-  /* 🔹 Helpers */
-  function random(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  /* 🔹 Particles */
-  const particles = [];
-  const COUNT = 150;
-
-  function initParticles() {
-    particles.length = 0;
-
-    for (let i = 0; i < COUNT; i++) {
-      const item = images[Math.floor(Math.random() * images.length)];
-
-      particles.push({
-        x: random(0, cw),
-        y: random(0, ch),
-        baseSize: getBaseSize(),
-        speedX: random(-0.3, 0.3),
-        speedY: random(-2.5, -0.6) / item.scale,
-        img: item.img,
-        scale: item.scale
-      });
+    loaded++;
+    if (loaded === imageConfig.length) {
+      initParticles();
+      requestAnimationFrame(animate);
     }
-  }
+  };
+});
 
-  /* 🔹 Animate */
-  function animate() {
-    ctx2.clearRect(0, 0, cw, ch);
+/* ==============================
+   PARTICLES
+============================== */
+const particles = [];
+const COUNT = window.innerWidth < 768 ? 80 : 120;
 
-    particles.forEach(p => {
-      p.x += p.speedX;
-      p.y += p.speedY;
+function initParticles() {
+  particles.length = 0;
 
-      if (p.y + p.baseSize * p.scale < 0) {
-        p.y = ch + p.baseSize;
-        p.x = random(0, cw);
+  for (let i = 0; i < COUNT; i++) {
+    const item = images[Math.floor(Math.random() * images.length)];
 
-        const item = images[Math.floor(Math.random() * images.length)];
-        p.img = item.img;
-        p.scale = item.scale;
-      }
-
-      const aspect = p.img.naturalWidth / p.img.naturalHeight;
-      const h = p.baseSize * p.scale;
-      const w = h * aspect;
-
-      ctx2.drawImage(
-        p.img,
-        p.x - w / 2,
-        p.y,
-        w,
-        h
-      );
+    particles.push({
+      x: random(0, cw),
+      y: random(0, ch),
+      baseSize: getBaseSize(),
+      speedX: random(-0.3, 0.3),
+      speedY: random(-1.8, -0.6) / item.scale,
+      img: item.img,
+      scale: item.scale,
+      aspect: item.aspect
     });
+  }
+}
 
+/* ==============================
+   ANIMATION (FPS LIMITED)
+============================== */
+let lastTime = 0;
+const FPS = 40;
+const frameInterval = 1000 / FPS;
+
+function animate(time) {
+  if (time - lastTime < frameInterval) {
     requestAnimationFrame(animate);
+    return;
+  }
+  lastTime = time;
+
+  ctx2.clearRect(0, 0, cw, ch);
+
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    if (p.y + p.baseSize * p.scale < 0) {
+      p.y = ch + p.baseSize;
+      p.x = random(0, cw);
+
+      const item = images[Math.floor(Math.random() * images.length)];
+      p.img = item.img;
+      p.scale = item.scale;
+      p.aspect = item.aspect;
+    }
+
+    const h = p.baseSize * p.scale;
+    const w = h * p.aspect;
+
+    ctx2.drawImage(
+      p.img,
+      p.x - w / 2,
+      p.y,
+      w,
+      h
+    );
   }
 
- window.addEventListener("resize", () => {
-  screenW = window.innerWidth;
-  resizeCanva();
-  initParticles(); // recreate icons with correct size
+  requestAnimationFrame(animate);
+}
+
+/* ==============================
+   VISIBILITY OPTIMIZATION
+============================== */
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    lastTime = 0;
+  }
 });
 
 
