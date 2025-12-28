@@ -3463,11 +3463,11 @@ footer a {
   position: relative;
 
   box-shadow:
-    inset 0 0 20px rgba(82, 206, 201, 0.4),
+    inset 0 0 20px rgba(82, 206, 201, 0.7),
     inset 0 0 12px rgba(68, 189, 188, 0.9),
-    inset 0 0 22px rgba(113, 81, 164, 0.5),
+    inset 0 0 22px rgba(113, 81, 164, 0.2),
     inset 0 0 36px rgba(94, 63, 141, 0.2),
-    0 0 6px rgba(82, 206, 201, 1),
+    0 0 6px rgba(82, 206, 201, 0.4),
     0 0 12px rgba(82, 206, 201, 0.5),
     0 0 18px rgba(113, 81, 164, 0.3),
     0 0 20px rgba(94, 63, 141, 0);
@@ -3785,6 +3785,7 @@ footer a {
   margin-top: 28px;
   flex-wrap: nowrap;
 }
+
 /* TIME BOX */
 .time-box {
   width: 92px;
@@ -3795,11 +3796,9 @@ footer a {
   align-items: center;
   justify-content: center;
 
-  background: radial-gradient(
-    circle at center,
-    rgba(0,255,255,0.12),
-    rgba(10,12,30,0.95) 70%
-  );
+  background: radial-gradient(circle at center,
+      rgba(0, 255, 255, 0.12),
+      rgba(10, 12, 30, 0.95) 70%);
 
   backdrop-filter: blur(14px);
 }
@@ -3810,32 +3809,32 @@ footer a {
   position: absolute;
   inset: 0;
   border-radius: 18px;
-  padding: 0.2rem;
+  padding: 0.25rem;
 
   background:
-    /* TOP — CYAN */
-    linear-gradient(cyan, cyan)
-      top / 100% 30% no-repeat,
+    linear-gradient(to bottom,
+      rgba(0, 255, 255, 1) 0%,
+      rgba(0, 255, 255, 1) 30%,
+      rgba(155, 43, 255, 1) 55%,
+      rgba(155, 43, 255, 1) 100%) left / 50% 100% no-repeat,
 
-    /* BOTTOM — PURPLE */
-    linear-gradient(#9b2bff, #9b2bff)
-      bottom / 100% 50% no-repeat,
+    /* RIGHT — SAME BLEND */
+    linear-gradient(to bottom,
+      rgba(0, 255, 255, 1) 0%,
+      rgba(0, 255, 255, 1) 30%,
+      rgba(155, 43, 255, 1) 55%,
+      rgba(155, 43, 255, 1) 100%) right / 50% 100% no-repeat;
 
-    /* LEFT — CYAN → PURPLE */
-    linear-gradient(to bottom, cyan, #9b2bff)
-      left / 50% 100% no-repeat,
 
-    /* RIGHT — CYAN → PURPLE */
-    linear-gradient(to bottom, cyan, #9b2bff)
-      right / 50% 100% no-repeat;
+  /* filter: blur(1px); */
 
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  pointer-events: none;
 }
+
 
 /* INNER SOFT GLOW */
 .time-box::after {
@@ -3845,8 +3844,8 @@ footer a {
   border-radius: 14px;
 
   background:
-    radial-gradient(circle at top, rgba(0,255,255,0.25), transparent 50%),
-    radial-gradient(circle at bottom, rgba(155,43,255,0.25), transparent 60%);
+    radial-gradient(circle at top, rgba(0, 255, 255, 0.25), transparent 50%),
+    radial-gradient(circle at bottom, rgba(155, 43, 255, 0.25), transparent 60%);
 
   pointer-events: none;
 }
@@ -3854,11 +3853,9 @@ footer a {
 
 /* HOVER – FULL PURPLE GLOW */
 .time-box:hover::before {
-  background: linear-gradient(
-    135deg,
-    #d38bff 0%,
-    #9b2bff 100%
-  );
+  background: linear-gradient(135deg,
+      #d38bff 0%,
+      #9b2bff 100%);
 }
 
 .time-box:hover {
@@ -3866,28 +3863,13 @@ footer a {
     0 0 18px rgba(211, 139, 255, 0.6),
     0 0 40px rgba(155, 43, 255, 0.45);
 }
-/* INNER SOFT GLOW */
-.time-box::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border-radius: 14px;
-
-  background:
-    radial-gradient(circle at top, rgba(0,255,255,0.25), transparent 50%),
-    radial-gradient(circle at bottom, rgba(155,43,255,0.25), transparent 60%);
-
-  pointer-events: none;
-}
 
 
 /* HOVER – FULL PURPLE GLOW */
 .time-box:hover::before {
-  background: linear-gradient(
-    135deg,
-    #d38bff 0%,
-    #9b2bff 100%
-  );
+  background: linear-gradient(135deg,
+      #d38bff 0%,
+      #9b2bff 100%);
 }
 
 .time-box:hover {
@@ -3926,6 +3908,7 @@ footer a {
 
   backdrop-filter: blur(10px);
 }
+
 .time-box:hover::after {
   background: none;
 }
