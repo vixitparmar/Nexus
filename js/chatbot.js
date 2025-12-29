@@ -158,5 +158,37 @@ function hideTyping() {
     hideTyping();
 
   }
+// ELEMENTS
+const toStep2Btn = document.getElementById("toStep2");
+const amountInput = document.getElementById("purchaseAmount");
+
+const stepContents = document.querySelectorAll(".step-content");
+const steps = document.querySelectorAll(".step");
+
+// PRESET BUTTONS
+document.querySelectorAll(".amount-presets button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    amountInput.value = btn.dataset.value;
+  });
+});
+
+// CONTINUE TO STEP 2
+toStep2Btn.addEventListener("click", () => {
+  const amount = parseInt(amountInput.value);
+
+  // VALIDATION
+  if (isNaN(amount) || amount < 200 || amount > 15000) {
+    alert("Please enter an amount between $200 and $15,000");
+    return;
+  }
+
+  // HIDE STEP 1, SHOW STEP 2
+  stepContents.forEach(c => c.classList.remove("active"));
+  document.getElementById("step2").classList.add("active");
+
+  // UPDATE STEP INDICATORS
+  steps.forEach(s => s.classList.remove("active"));
+  steps[1].classList.add("active"); // Step 2
+});
 
 });
