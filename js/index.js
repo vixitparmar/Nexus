@@ -251,30 +251,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // Select all elements with .visual-card or .ai-image
-  const aiBoxes = document.querySelectorAll('.visual-card, .ai-image');
+const aiBoxes = document.querySelectorAll('.visual-card, .ai-image');
 
-  aiBoxes.forEach(aiBox => {
-    const video = aiBox.querySelector('video');
+aiBoxes.forEach(aiBox => {
+  const video = aiBox.querySelector('video');
+  if (!video) return;
 
-    if (!video) return; // skip if no video inside
+  // Initial state
+  video.pause();
+  video.currentTime = 0;
 
-    // Make sure the video is paused and reset when the page loads
-    video.pause();
-    video.currentTime = 0;
-
-    aiBox.addEventListener('mouseenter', () => {
-      setTimeout(() => {
-        video.play(); // play after 0.5 seconds when mouse enters
-      }, 500); // 500ms delay before playing the video
-    });
-
-    aiBox.addEventListener('mouseleave', () => {
-      setTimeout(() => {
-        video.pause();
-        video.currentTime = 0; // reset video after 0.5 seconds when mouse leaves
-      }, 500); // 500ms delay before pausing and resetting the video
-    });
+  aiBox.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+      aiBox.classList.add('playing');
+    } else {
+      video.pause();
+      video.currentTime = 0; // remove if you want resume instead
+      aiBox.classList.remove('playing');
+    }
   });
+
+  // Reset when video ends
+  video.addEventListener('ended', () => {
+    aiBox.classList.remove('playing');
+    video.currentTime = 0;
+  });
+});
+
 
 const canva = document.getElementById("background-canvas");
 const ctx2 = canva.getContext("2d");
@@ -416,6 +420,7 @@ document.addEventListener("visibilitychange", () => {
     lastTime = 0;
   }
 });
+
 
 
 
